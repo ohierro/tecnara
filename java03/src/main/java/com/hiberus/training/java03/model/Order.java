@@ -1,14 +1,23 @@
 package com.hiberus.training.java03.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
-//@Entity
-//@Table(name = "ProductOrder")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ProductOrder")
 public class Order {
 
+    @Column
+    @Setter @Getter
+    @Id
     private Long id;
 
+    @Column
+    @Setter @Getter
     private Integer quantity;
 }

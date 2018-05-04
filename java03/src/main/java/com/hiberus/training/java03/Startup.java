@@ -1,5 +1,7 @@
 package com.hiberus.training.java03;
 
+import com.hiberus.training.java03.model.Order;
+import com.hiberus.training.java03.model.OrderRepository;
 import com.hiberus.training.java03.model.Product;
 import com.hiberus.training.java03.model.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class Startup implements ApplicationRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -30,5 +35,11 @@ public class Startup implements ApplicationRunner {
         product.setDescription("Secador de pelo");
 
         productRepository.save(product);
+
+        Order order = new Order();
+        order.setId(1L);
+        order.setQuantity(10);
+
+        orderRepository.save(order);
     }
 }
