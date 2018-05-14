@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -12,6 +13,7 @@ public class Product {
     @Setter @Getter
     @Column
     @Id
+    @GeneratedValue
     private Long id;
 
     @Setter @Getter

@@ -23,22 +23,20 @@ public class Startup implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         Product product = new Product();
-        product.setId(1L);
         product.setName("Cepillo");
         product.setDescription("Cepillo de dientes azul");
 
         productRepository.save(product);
 
         product = new Product();
-        product.setId(2L);
         product.setName("Secador");
         product.setDescription("Secador de pelo");
 
         productRepository.save(product);
 
         Order order = new Order();
-        order.setId(1L);
         order.setQuantity(10);
+        order.setProduct(product);
 
         orderRepository.save(order);
     }
