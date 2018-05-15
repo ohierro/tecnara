@@ -39,6 +39,156 @@
 			"response": []
 		},
 		{
+			"name": "Obtener un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8945ba99-6306-4521-aa73-ee0a6e74bff8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8085/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"users",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener redes sociales de un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8945ba99-6306-4521-aa73-ee0a6e74bff8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8085/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"users",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir una nueva red social",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8945ba99-6306-4521-aa73-ee0a6e74bff8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"name\": \"Facebook\",\n\t\"url\": \"http://www.facebook.com/foo\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/users/1/networks",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"users",
+						"1",
+						"networks"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Establecer la red social favorita",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8945ba99-6306-4521-aa73-ee0a6e74bff8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"favourite\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/users/1/fav",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"users",
+						"1",
+						"fav"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "Nuevo usuario",
 			"request": {
 				"method": "POST",
