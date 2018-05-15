@@ -1,0 +1,12 @@
+[
+    "index.md",
+    "modelo-de-capas.md",
+    "ambito-de-las-capas.md",
+    "jpa-java-persistence-api.md",
+    "jpa-trabajando-con-la-bd.md",
+    "jpa-trabajando-con-la-bd-ii.md",
+    "jpa-trabajando-con-la-bd-relaciones.md",
+    "jpa-trabajando-con-la-bd-relaciones-ii.md",
+    "jpa-repositorios.md",
+    "providers.md"
+]
