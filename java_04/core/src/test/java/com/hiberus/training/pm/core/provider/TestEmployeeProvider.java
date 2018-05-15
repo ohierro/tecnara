@@ -1,8 +1,11 @@
 package com.hiberus.training.pm.core.provider;
 
-import com.hiberus.training.pm.core.controller.EmployeeDto;
+import com.hiberus.training.pm.core.db.AddressRepository;
 import com.hiberus.training.pm.core.db.EmployeeRepository;
+import com.hiberus.training.pm.core.db.PhoneRepository;
+import com.hiberus.training.pm.core.db.entity.Address;
 import com.hiberus.training.pm.core.db.entity.Employee;
+import com.hiberus.training.pm.core.provider.impl.EmployeeProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,11 +13,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -28,10 +31,16 @@ public class TestEmployeeProvider {
     @Mock
     private EmployeeRepository employeeRepository;
 
+    @Mock
+    private AddressRepository addressRepository;
+
+    @Mock
+    private PhoneRepository phoneRepository;
+
     @Before
     public void setUp() {
         ModelMapper mapper = new ModelMapper();
-        employeeProvider = new EmployeeProvider(employeeRepository, null, mapper);
+        employeeProvider = new EmployeeProvider(employeeRepository, phoneRepository, addressRepository,  mapper);
     }
 
     @Test
@@ -96,5 +105,24 @@ public class TestEmployeeProvider {
 
         // check
         verify(employeeRepository, times(0)).findByFullName(anyString());
+    }
+
+    @Test
+    public void testSetAddress() {
+        // set up data
+        AddressDto addressDto = new AddressDto(null, "Fake 123", "Zaragoza", "Zaragoza", "Spain", "50000");
+        Address addressEntity = new Address(1L, "Fake 123", "Zaragoza", "Zaragoza", "Spain", "50000");
+        Employee employeeEntity = new Employee("Test","test",21.3f,new Date());
+
+        when(addressRepository.save(any())).thenReturn(addressEntity);
+        when(employeeRepository.findById(anyLong())).thenReturn(Optional.of(employeeEntity));
+//        when(employeeRepository.save(any(Employee.class)));
+
+        // call
+        AddressDto result = employeeProvider.setAddress(1L, addressDto);
+
+        // check
+        verify(addressRepository).save(any(Address.class));
+        verify(employeeRepository).save(employeeEntity);
     }
 }

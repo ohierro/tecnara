@@ -43,4 +43,8 @@ public class Employee {
     @OneToMany(mappedBy = "owner")
     @Setter @Getter
     private List<Phone> phoneList;
+
+    @OneToOne
+    @Setter @Getter
+    private Address address;
 }

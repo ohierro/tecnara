@@ -8,3 +8,9 @@ spring:
       path: /h2
 server:
   port: 8085
+---
+spring:
+  profiles: integration
+  datasource:
+    url: "jdbc:h2:/home/ohierro/projects/04_training/tecnara_course/java04/core/ci-test"
+    driver-class-name: org.h2.Driver

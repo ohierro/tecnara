@@ -1,18 +1,14 @@
 package com.hiberus.training.pm.core.controller.impl;
 
-import com.hiberus.training.pm.core.controller.IEmployeeService;
-import com.hiberus.training.pm.core.controller.EmployeeDto;
-import com.hiberus.training.pm.core.db.EmployeeRepository;
-import com.hiberus.training.pm.core.db.entity.Employee;
-import com.hiberus.training.pm.core.provider.EmployeeProvider;
+import com.hiberus.training.pm.core.provider.EmployeeDto;
+import com.hiberus.training.pm.core.provider.AddressDto;
+import com.hiberus.training.pm.core.provider.impl.EmployeeProvider;
 import com.hiberus.training.pm.core.provider.PhoneDto;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,5 +40,10 @@ public class EmployeeService {
     @GetMapping(path = "/employees/byPhone")
     public EmployeeDto findByPhone(@RequestParam  String phoneNumber) {
         return employeeProvider.findByPhone(phoneNumber);
+    }
+
+    @PostMapping(path = "/employees/{id}/address")
+    public AddressDto addAddress(@PathVariable Long id, @RequestBody AddressDto address) {
+        return employeeProvider.setAddress(id, address);
     }
 }

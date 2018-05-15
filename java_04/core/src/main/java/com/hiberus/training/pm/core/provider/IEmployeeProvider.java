@@ -1,8 +1,10 @@
-package com.hiberus.training.pm.core.controller;
+package com.hiberus.training.pm.core.provider;
+
+import com.hiberus.training.pm.core.provider.EmployeeDto;
 
 import java.util.List;
 
-public interface IEmployeeService {
+public interface IEmployeeProvider {
 
     List<EmployeeDto> listEmployees();
 

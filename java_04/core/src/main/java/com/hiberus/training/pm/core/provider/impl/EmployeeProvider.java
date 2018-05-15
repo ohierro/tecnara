@@ -1,11 +1,15 @@
-package com.hiberus.training.pm.core.provider;
+package com.hiberus.training.pm.core.provider.impl;
 
-import com.hiberus.training.pm.core.controller.EmployeeDto;
-import com.hiberus.training.pm.core.controller.IEmployeeService;
+import com.hiberus.training.pm.core.db.AddressRepository;
 import com.hiberus.training.pm.core.db.EmployeeRepository;
 import com.hiberus.training.pm.core.db.PhoneRepository;
+import com.hiberus.training.pm.core.db.entity.Address;
 import com.hiberus.training.pm.core.db.entity.Employee;
 import com.hiberus.training.pm.core.db.entity.Phone;
+import com.hiberus.training.pm.core.provider.AddressDto;
+import com.hiberus.training.pm.core.provider.EmployeeDto;
+import com.hiberus.training.pm.core.provider.IEmployeeProvider;
+import com.hiberus.training.pm.core.provider.PhoneDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,17 +19,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class EmployeeProvider implements IEmployeeService {
+public class EmployeeProvider implements IEmployeeProvider {
     private final EmployeeRepository employeeRepository;
     private final PhoneRepository phoneRepository;
     private final ModelMapper modelMapper;
+    private final AddressRepository addressRepository;
 
     @Autowired
     public EmployeeProvider(EmployeeRepository employeeRepository,
                             PhoneRepository phoneRepository,
+                            AddressRepository addressRepository,
                             ModelMapper modelMapper) {
         this.employeeRepository = employeeRepository;
         this.phoneRepository = phoneRepository;
+        this.addressRepository = addressRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -62,6 +69,18 @@ public class EmployeeProvider implements IEmployeeService {
         phoneRepository.save(entity);
     }
 
+    public AddressDto setAddress(Long employeeId, AddressDto address) {
+        Address entity = modelMapper.map(address, Address.class);
+
+        entity = addressRepository.save(entity);
+
+        Employee employee = employeeRepository.findById(employeeId).get();
+        employee.setAddress(entity);
+        employeeRepository.save(employee);
+
+        return modelMapper.map(entity, AddressDto.class);
+    }
+
 
     private EmployeeDto convertToDto(Employee employee) {
         EmployeeDto dto = new EmployeeDto();
@@ -84,4 +103,10 @@ public class EmployeeProvider implements IEmployeeService {
         return entity;
     }
 
+    private Address convertToEntity(AddressDto dto) {
+        Address entity = new Address();
+        modelMapper.map(dto, entity);
+
+        return entity;
+    }
 }
